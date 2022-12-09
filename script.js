@@ -81,14 +81,17 @@ movements.forEach(function (movement) {
   }
 });
 
-/////////////////////////////////////////////////
+const createUserName = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map(function (name) {
+        return name[0];
+      })
+      .join("");
+  });
+};
 
-const eurToUsd = 1.1;
-
-const movementsUsd = movements.map(function (mov) {
-  return mov * eurToUsd;
-});
-console.log(movements);
-console.log(movementsUsd);
-
-const movementsUsd2 = movements.map((mov) => mov * eurToUsd);
+createUserName(accounts);
+console.log(accounts);
