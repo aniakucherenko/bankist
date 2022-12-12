@@ -61,10 +61,6 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
 const currencies = new Map([
   ["USD", "United States dollar"],
   ["EUR", "Euro"],
@@ -72,14 +68,6 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-movements.forEach(function (movement) {
-  if (movement > 0) {
-    console.log(`You deposited ${movement}`);
-  } else {
-    console.log(`You withdrew ${Math.abs(movement)}`);
-  }
-});
 
 const createUserName = function (accs) {
   accs.forEach(function (acc) {
@@ -93,5 +81,41 @@ const createUserName = function (accs) {
   });
 };
 
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcPrintBalance(account1.movements);
 createUserName(accounts);
 console.log(accounts);
+
+//STUDY
+
+// movements.forEach(function (movement) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(`You withdrew ${Math.abs(movement)}`);
+//   }
+// });
+
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+
+// const withdrawals = movements.filter(function (mov) {
+//   return mov < 0;
+// });
+
+// console.log(movements);
+// console.log(deposits);
+// console.log(withdrawals);
+
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+
+// console.log(balance);
