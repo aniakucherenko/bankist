@@ -80,16 +80,23 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
-const createUserName = function (accs) {
-  accs.forEach(function(acc){
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+
+const createUserNames = function (accs) {
+  accs.forEach(function (acc) {
     acc.username = acc.owner
-    .toLowerCase()
-    .split(" ")
-    .map((name) => name[0])
-    .join("");
-  return username;
-});
-console.log(createUserName("Steven Thomas Williams"));
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
+};
+createUserNames(accounts);
+console.log(accounts);
 
 // const currencies = new Map([
 //   ["USD", "United States dollar"],
@@ -97,7 +104,7 @@ console.log(createUserName("Steven Thomas Williams"));
 //   ["GBP", "Pound sterling"],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const createUserName = function (accs) {
 //   accs.forEach(function (acc) {
@@ -123,14 +130,6 @@ console.log(createUserName("Steven Thomas Williams"));
 
 //STUDY
 
-// movements.forEach(function (movement) {
-//   if (movement > 0) {
-//     console.log(`You deposited ${movement}`);
-//   } else {
-//     console.log(`You withdrew ${Math.abs(movement)}`);
-//   }
-// });
-
 // const deposits = movements.filter(function (mov) {
 //   return mov > 0;
 // });
@@ -149,3 +148,33 @@ console.log(createUserName("Steven Thomas Williams"));
 // }, 0);
 
 // console.log(balance);
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+// console.log(movements);
+// console.log(deposits);
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+const withdrawals = movements.filter(function (mov) {
+  return mov < 0;
+});
+// console.log(withdrawals);
+
+console.log(movements);
+
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  console.log(`Iteration number ${i}: ${acc}`);
+  return acc + cur;
+}, 0);
+console.log(balance);
+
+const balance2 = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance2);
+
+let balanceFor = 0;
+for (const mov of movements) balanceFor += mov;
+console.log(balanceFor);
