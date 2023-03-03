@@ -80,6 +80,17 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const createUserName = function (accs) {
+  accs.forEach(function(acc){
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(" ")
+    .map((name) => name[0])
+    .join("");
+  return username;
+});
+console.log(createUserName("Steven Thomas Williams"));
+
 // const currencies = new Map([
 //   ["USD", "United States dollar"],
 //   ["EUR", "Euro"],
