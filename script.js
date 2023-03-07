@@ -78,13 +78,12 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
-displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance}€`;
 };
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = function (movements) {
   const incomes = movements
@@ -106,7 +105,7 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}€`;
 };
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
 
 const createUserNames = function (accs) {
   accs.forEach(function (acc) {
@@ -118,7 +117,28 @@ const createUserNames = function (accs) {
   });
 };
 createUserNames(accounts);
-console.log(accounts);
+
+let currentAccount;
+
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount.movements);
+  }
+});
 
 // const currencies = new Map([
 //   ["USD", "United States dollar"],
@@ -179,39 +199,39 @@ const deposits = movements.filter(function (mov) {
 
 const depositsFor = [];
 for (const mov of movements) if (mov > 0) depositsFor.push(mov);
-console.log(depositsFor);
+// console.log(depositsFor);
 
 const withdrawals = movements.filter(function (mov) {
   return mov < 0;
 });
 // console.log(withdrawals);
 
-console.log(movements);
+// console.log(movements);
 
-const balance = movements.reduce(function (acc, cur, i, arr) {
-  console.log(`Iteration number ${i}: ${acc}`);
-  return acc + cur;
-}, 0);
-console.log(balance);
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration number ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+// console.log(balance);
 
 const balance2 = movements.reduce((acc, cur) => acc + cur, 0);
-console.log(balance2);
+// console.log(balance2);
 
 let balanceFor = 0;
 for (const mov of movements) balanceFor += mov;
-console.log(balanceFor);
+// console.log(balanceFor);
 
 const max = movements.reduce((acc, mov) => {
   if (acc > mov) return acc;
   else return mov;
 }, movements[0]);
-console.log(max);
+// console.log(max);
 
 const firstWithDrawal = movements.find((mov) => mov < 0);
 
-console.log(movements);
-console.log(firstWithDrawal);
-console.log(accounts);
+// console.log(movements);
+// console.log(firstWithDrawal);
+// console.log(accounts);
 
 const account = accounts.find((acc) => acc.owner === "Jessica Davis");
-console.log(account);
+// console.log(account);
